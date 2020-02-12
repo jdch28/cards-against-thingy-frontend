@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <v-container>
-      <CzarView cardText="This a black card!!"/>
+      <CzarView cardText="This is a black card!!"/>
   </v-container>
   </v-app>
 </template>
