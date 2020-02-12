@@ -1,6 +1,6 @@
 
 export default {
-  currentState: "RoundResultView",
+  currentState: "LobbyView",
   roundResults: {
     winnerPlayer: '',
     whiteCard: 'OMG!!',
