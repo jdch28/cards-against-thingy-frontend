@@ -1,10 +1,7 @@
 <template>
-  <v-text-field
-     class="field-name"
-     label="Name"
-     placeholder="Type your name"
-     outlined
-    ></v-text-field>
+  <div class="cad-container typewriter">
+    <h1>Cards Against Developers</h1>
+  </div>
 </template>
 
 <script>
@@ -14,9 +11,5 @@ export default {
 </script>
 
 <style>
-.field-name {
-  justify-content:center;
-  align-items:center;
-}
-
+@import '../assets/css/sign_up_view.css';
 </style>
