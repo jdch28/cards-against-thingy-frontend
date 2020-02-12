@@ -1,0 +1,14 @@
+body {
+  padding: 3%;
+  background-color: #121212;
+  font-family: 'VT323', monospace;
+  font-weight: 900;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-container {
+  display: flex;
+  height: 100%;
+}
