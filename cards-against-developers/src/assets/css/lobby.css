@@ -1,12 +1,74 @@
-.typewriter h1 {
+.bottom-section {
+  margin-top: 20em;
+  /* display: none */
+}
+
+.wise-input-container {
   display: flex;
-  overflow: hidden;
-  border-right: .15em solid green;
+  align-items: center;
+}
+
+.wise-input:focus {
+  outline: none;
+}
+
+.wise-input {
+  display: block;
+  margin: 10px 7px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-left: transparent solid 1px;
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.typewriter p {
+  border-right: .15em solid white;
+  font-size: 28px;
   white-space: nowrap;
-  letter-spacing: .15em;
-  animation:
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end;
+  overflow: hidden;
+}
+
+.typewriter p:nth-child(1) {
+  margin-top: 10em;
+  width: 10.5em;
+  animation: type 2s steps(24, end), blink .5s step-end infinite alternate;
+  animation-fill-mode: forwards;
+}
+
+.typewriter p:nth-child(2) {
+  font-size: 20px;
+  width: 6.5em;
+  opacity: 0;
+  animation: type2 1.5s steps(14, end);
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+
+.typewriter div {
+  font-size: 20px;
+  width: 10em;
+  opacity: 0;
+  animation: type3 0.2s steps(1, end);
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+
+  99.9% {
+    border-right: .15em solid white;
+  }
+
+  100% {
+    border: none;
+  }
 }
 
 .wise-button {
@@ -15,27 +77,42 @@
   text-align: left;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from {
-    width: 0
-  }
-  to {
-    width: 100%
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent
+@keyframes type2 {
+  0% {
+    width: 0;
   }
 
-  50% {
-    border-color: green;
+  1% {
+    opacity: 1;
+  }
+
+  99.9% {
+    border-right: .15em solid white;
   }
 
   100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes blink {
+  50% {
     border-color: transparent;
   }
 }

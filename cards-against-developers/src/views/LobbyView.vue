@@ -1,8 +1,18 @@
 <template>
   <div>
-    <header class="typewriter">
-      <h1>Cards Against Developers</h1>
-    </header>
+    <header></header>
+
+    <section data-section="otra" class="typewriter">
+      <p>Cards Against Developers</p>
+      <p>Type your name</p>
+      <div class="wise-input-container">
+        <label> &gt; </label>
+        <input type="text" id="wise-input-id" class="wise-input" ref="search">
+      </div>
+      <div class="bottom-section">
+        <button v-on:click="nextState">Next Page</button>
+      </div>
+    </section>
 
     <section data-section="choose-wisely">
       <button class="wise-button" v-on:click="newGame"><span class="wise-button--index">1.</span>&nbsp;New</button>
@@ -32,6 +42,7 @@
 </template>
 
 <script>
+setTimeout(function(){ document.getElementById("wise-input-id").focus(); }, 5000);
 
 export default {
   name: 'LobbyView',
