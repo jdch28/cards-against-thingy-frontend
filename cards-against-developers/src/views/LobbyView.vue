@@ -1,27 +1,58 @@
 <template>
   <div>
-    <header class="typewriter">
-      <h1>Cards Against Developers</h1>
-    </header>
+    <header></header>
 
-    <section data-section="choose-wisely">
-      <wise-button index="1" label="new"/>
-      <wise-button index="2" label="join"/>
+    <section data-section="otra" class="typewriter">
+      <p>Cards Against Developers</p>
+      <p>Type your name</p>
+      <div class="wise-input-container">
+        <label> &gt; </label>
+        <input type="text" id="wise-input-id" class="wise-input" ref="search">
+      </div>
+      <div class="bottom-section">
+        <button v-on:click="nextState">Next Page</button>
+      </div>
     </section>
 
-    <div>
+    <section data-section="choose-wisely">
+      <button class="wise-button" v-on:click="newGame"><span class="wise-button--index">1.</span>&nbsp;New</button>
+      <button class="wise-button" v-on:click="joinGame"><span class="wise-button--index">2.</span>&nbsp;Join</button>
+    </section>
+
+    <section v-if="showJoinGame" data-section="join-game">
+      <h1>Enter Game PIN</h1>
+      <input type="text">
+    </section>
+
+    <section v-if="showGameLobby" data-section="game-lobby">
+      <h1>Waiting for players</h1>
+      <h2>Game PIN: 1255</h2>
+      <ul>
+        <li>Anel has joined...</li>
+        <li>JD one has joined...</li>
+        <li>Bruno has joined...</li>
+      </ul>
+      <h2>Ready to begin.</h2>
+    </section>
+
+    <div v-if="false">
       <button v-on:click="nextState">Next Page</button>
     </div>
   </div>
 </template>
 
 <script>
-import WiseButton from '../components/WiseButton.vue'
+setTimeout(function(){ document.getElementById("wise-input-id").focus(); }, 5000);
 
 export default {
   name: 'LobbyView',
-  components: {
-    WiseButton,
+  data() {
+    return {
+      showChooseWisely: false,
+      showJoinGame: false,
+      showGameLobby: false,
+      buttonsEnabled: true,
+    }
   },
   computed: {
     currentState: {
@@ -36,9 +67,22 @@ export default {
   methods: {
     nextState() {
       this.currentState = 'LobbyView';
+    },
+    newGame() {
+      if (this.buttonsEnabled) {
+        this.showGameLobby = true;
+        this.buttonsEnabled = false;
+      }
+    },
+    joinGame() {
+      if (this.buttonsEnabled) {
+        this.showJoinGame = true;
+        this.buttonsEnabled = false;
+      }
     }
   }
 }
+
 </script>
 
 <style>
