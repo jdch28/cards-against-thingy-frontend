@@ -1,20 +1,20 @@
 <template>
   <div>
-    <v-btn large>Now</v-btn>
-    <v-btn large>Join</v-btn>
+    <h1>Hello!</h1>
+    <wise-button />
   </div>
 </template>
 
 <script>
-export default {
+import WiseButton from '../components/WiseButton.vue'
 
+export default {
+  components: {
+    WiseButton,
+  }
 }
 </script>
 
 <style>
-.field-name {
-  justify-content:center;
-  align-items:center;
-}
 
 </style>

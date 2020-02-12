@@ -1,10 +1,7 @@
 <template>
-  <v-app>
-  <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
-  <v-container fluid class="page-container">
+  <div>
     <choose-wisely-view />
-  </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -19,5 +16,6 @@ export default {
 </script>
 
 <style>
-@import "assets/css/app.css";
+@import 'assets/css/reset.css';
+@import 'assets/css/app.css';
 </style>
