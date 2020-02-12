@@ -1,23 +1,27 @@
 <template>
-  <button class="wise-button"><span class="wise-button--arrow">&gt;</span>new</button>
+  <button class="wise-button"><span class="wise-button--index">{{ index }}.</span>&nbsp;{{ label }}</button>
 </template>
 
 <script>
 export default {
-
+  name: 'WiseButton',
+  props: {
+    index: {
+      type: Number,
+      required: true
+    },
+    label: {
+      type: String,
+      required: true
+    },
+  }
 }
 </script>
 
 <style>
   .wise-button {
     display: block;
-    margin: 0 auto 10px;
-    font-size: 2em;
-    width: 30%;
+    margin: 10px 0;
     text-align: left;
-  }
-  .wise-button--arrow {
-    width: 0.7em;
-    display: inline-block;
   }
 </style>

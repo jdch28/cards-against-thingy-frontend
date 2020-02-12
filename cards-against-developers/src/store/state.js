@@ -1,4 +1,4 @@
 
 export default {
-  currentState: 'SignUpView',
+  currentState: 'LobbyView'
 }
