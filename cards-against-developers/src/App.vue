@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <CzarView cardText="This a black card!!"/>
-  </div>
+  <v-app>
+  <v-container>
+      <CzarView cardText="This a black card!!"/>
+  </v-container>
+  </v-app>
 </template>
 
 <script>
