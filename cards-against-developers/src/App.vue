@@ -1,18 +1,18 @@
 <template>
   <v-app>
   <v-container>
-      <CzarView cardText="This is a black card!!"/>
+      <Card cardText="This is a black card!!"/>
   </v-container>
   </v-app>
 </template>
 
 <script>
-import CzarView from './components/CzarView.vue'
+import Card from './components/Card.vue'
 
 export default {
   name: 'App',
   components: {
-    CzarView,
+    Card,
   }
 }
 </script>
