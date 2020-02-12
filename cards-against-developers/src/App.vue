@@ -1,19 +1,19 @@
 <template>
   <v-app>
   <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
-  <v-container>
-      <Card cardText="This is a black card!!"/>
+  <v-container fluid class="page-container">
+      <choose-wisely-view />
   </v-container>
   </v-app>
 </template>
 
 <script>
-import Card from './components/Card.vue'
+import ChooseWiselyView from './views/ChooseWiselyView.vue'
 
 export default {
   name: 'App',
   components: {
-    Card,
+    ChooseWiselyView,
   }
 }
 </script>
@@ -26,5 +26,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.page-container {
+  display: flex;
+  height: 100%;
 }
 </style>
