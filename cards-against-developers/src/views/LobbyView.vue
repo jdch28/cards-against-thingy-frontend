@@ -5,8 +5,8 @@
     </header>
 
     <section data-section="choose-wisely">
-      <wise-button />
-      <wise-button />
+      <wise-button index="1" label="new"/>
+      <wise-button index="2" label="join"/>
     </section>
 
     <div>
