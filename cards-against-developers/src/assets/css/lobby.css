@@ -9,6 +9,12 @@
     blink-caret .75s step-end;
 }
 
+.wise-button {
+  display: block;
+  margin: 10px 0;
+  text-align: left;
+}
+
 /* The typing effect */
 @keyframes typing {
   from {
