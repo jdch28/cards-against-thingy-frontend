@@ -1,4 +1,10 @@
 
 export default {
-  currentState: 'LobbyView'
-}
+  currentState: "RoundResultView",
+  roundResults: {
+    winnerPlayer: '',
+    whiteCard: 'OMG!!',
+    blackCard: 'KHE!?',
+    isWinner: true,
+  }
+};
