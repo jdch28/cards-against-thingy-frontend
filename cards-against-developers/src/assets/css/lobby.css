@@ -1,9 +1,5 @@
-.cad-container {
-  display: flex;
-  color: #ffffff;
-}
-
 .typewriter h1 {
+  display: flex;
   overflow: hidden;
   border-right: .15em solid green;
   white-space: nowrap;

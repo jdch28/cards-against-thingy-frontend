@@ -11,9 +11,7 @@ export default {
 <style>
   .wise-button {
     display: block;
-    margin: 0 auto 10px;
-    font-size: 2em;
-    width: 30%;
+    margin: 10px 0;
     text-align: left;
   }
   .wise-button--arrow {

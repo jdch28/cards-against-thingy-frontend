@@ -2,6 +2,7 @@ body {
   padding: 3%;
   background-color: #121212;
   font-family: 'VT323', monospace;
+  font-size: 1.2em;
   font-weight: 900;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;

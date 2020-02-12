@@ -5,15 +5,11 @@
 </template>
 
 <script>
-import ChooseWiselyView from './views/ChooseWiselyView.vue'
-import SignUpView from './views/SignUpView.vue'
 import LobbyView from './views/LobbyView.vue'
 
 export default {
   name: 'App',
   components: {
-    ChooseWiselyView,
-    SignUpView,
     LobbyView
   },
   computed: {
