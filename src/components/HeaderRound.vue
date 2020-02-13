@@ -23,13 +23,11 @@ export default {
 
 <style scoped>
   h1 {
-    font-size: 1.8em;
-    font-weight: 900;
-    font-variant: small-caps;
-    margin: .1em 0 .6em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .3em;
   }
 
   h1 small {

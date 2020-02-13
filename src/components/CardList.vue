@@ -4,7 +4,7 @@
       <card
         :text="card.text"
         @click.native="isClickable ? tapCard(card.id) : null"
-        :class="{ 'card-selected': card.id === selectedCard }"
+        :class="{ 'card-selected': card.id === player.selectedCard.id }"
       />
     </li>
   </ul>
@@ -20,24 +20,24 @@ export default {
     Card
   },
   props: {
-    cards: String,
+    cards: Array,
     isClickable:  {
       type: Boolean,
       default: false,
     },
   },
   computed: {
-    ...mapState(['selectedCard'])
+    ...mapState(['player'])
   },
   methods: {
     ...mapActions([
-      'updateSelectedCard'
+      'updateSelectedCardId'
     ]),
     tapCard(cardId) {
-      if(this.selectedCard == cardId){
+      if(this.player.selectedCard.id == cardId){
         this.$emit('submit-selected-card', cardId);
       } else {
-        this.updateSelectedCard(cardId);
+        this.updateSelectedCardId(cardId);
       }
     }
   }
@@ -47,7 +47,6 @@ export default {
 <style scoped>
   .card {
     transition: 400ms;
-    margin-bottom: .5em;
   }
 
   .card-selected {

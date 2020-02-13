@@ -1,10 +1,12 @@
 <template>
   <main class="player-selection-main">
-    <header-round :round="roundState.index" :score="score"/>
+    <header-round :round="roundState.index" :score="player.score"/>
 
     <card :text="roundState.blackCard.text" :isBlack="true" />
 
-    <card-list :cards="hand" :isClickable="true" v-on:submit-selected-card="submitSelected"/>
+    <p class="help">Tap twice to confirm your selection</p>
+
+    <card-list :cards="player.hand" :isClickable="true" v-on:submit-selected-card="submitSelected"/>
   </main>
 </template>
 
@@ -19,22 +21,21 @@ export default {
   components: {
     Card,
     CardList,
-    HeaderRound,
+    HeaderRound
   },
   data() {
     return {
       roundState: this.$store.state.roundState,
-      hand: this.$store.state.playerHand,
-      score: this.$store.state.playerScore,
-      selectedCard: -1
+      player: this.$store.state.player
     }
   },
   methods: {
     ...mapActions([
-      'updateState'
+      'updateState',
+      'updatePlayerHand'
     ]),
-    submitSelected(cardId) {
-      alert(cardId);
+    submitSelected() {
+      this.updatePlayerHand();
       this.updateState('WaitingSentView');
     }
   }
@@ -45,5 +46,10 @@ export default {
   .card-black {
     padding-bottom: 1.5em;
     margin-bottom: 1em;
+  }
+  .help {
+    text-align: center;
+    margin-bottom: 1em;
+    font-weight: 300;
   }
 </style>

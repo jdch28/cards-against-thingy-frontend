@@ -32,7 +32,7 @@ export default {
   background-color: #fff;
   border-radius: .5em;
   width: calc(100% - 4em);
-  margin-left: 2em;
+  margin: .5em auto;
   height: auto;
   outline: none;
   text-decoration: none;

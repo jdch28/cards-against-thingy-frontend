@@ -14,8 +14,12 @@ export default {
     commit('UPDATE_ROUND_RESULTS', state);
   },
 
-  updateSelectedCard({ commit }, state) {
-    commit('UPDATE_SELECTED_CARD', state);
+  updateSelectedCardId({ commit }, state) {
+    commit('UPDATE_SELECTED_CARD_ID', state);
+  },
+
+  updatePlayerHand({ commit }, state) {
+    commit('UPDATE_PLAYER_HAND', state);
   },
 
   createSession({ commit }, name) {

@@ -24,7 +24,16 @@ export default {
     state.game = game;
   },
 
-  UPDATE_SELECTED_CARD(state, selectedId) {
-    state.selectedCard = selectedId;
+  UPDATE_SELECTED_CARD_ID(state, selectedCard) {
+    state.player.selectedCard.id = selectedCard;
+  },
+
+  UPDATE_PLAYER_HAND(state) {
+    var selectedIndex = state.player.hand.findIndex(function(i){
+      return (i.id === state.player.selectedCard.id);
+    });
+
+    state.player.selectedCard.text = state.player.hand[selectedIndex].text;
+    state.player.hand.splice(selectedIndex, 1);
   },
 };
