@@ -4,6 +4,10 @@ export default {
     state.currentState = current;
   },
 
+  UPDATE_LOBBY_STATE(state, lobbyState) {
+    state.lobbyState = lobbyState;
+  },
+
   UPDATE_ROUND_RESULTS(state, current) {
     state.roundResults = current;
   },

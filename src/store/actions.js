@@ -6,6 +6,10 @@ export default {
     commit('UPDATE_STATE', state);
   },
 
+  updateLobbyState({ commit }, state) {
+    commit('UPDATE_LOBBY_STATE', state);
+  },
+
   fetchRoundResults({ commit }, state) {
     commit('UPDATE_ROUND_RESULTS', state);
   },
@@ -34,6 +38,7 @@ export default {
     gameService.createGame(sessionToken).then(
       ({ pin }) => {
         commit('UPDATE_GAME', { pin: pin });
+        commit('UPDATE_LOBBY_STATE', 'GameLobby');
         console.log('game created, this is pin', pin);
       },
       () => {
@@ -66,6 +71,7 @@ export default {
     gameService.joinGame(pin, session).then(
       ({ pin, status, sessions }) => {
         commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions });
+        commit('UPDATE_LOBBY_STATE', 'GameLobby');
         console.log('game joined');
       },
       () => {

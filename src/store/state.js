@@ -1,6 +1,7 @@
 
 export default {
-  currentState: "LobbyView",
+  currentState: 'LobbyView',
+  lobbyState: '',
   session: {
     token: '',
     username: '',
