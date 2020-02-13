@@ -1,0 +1,17 @@
+# Ignore Apple file, it stores custom attributes of its containing folder
+.DS_Store
+
+# Ignore bundler config.
+/.bundle
+
+
+/public/packs
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+tmp/cache/webpacker
+
+.vscode
+.env.development
+.env.local
