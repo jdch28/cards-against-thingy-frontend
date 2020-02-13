@@ -44,6 +44,7 @@
 
 <script>
 setTimeout(function(){ document.getElementById('wise-input-id').focus(); }, 5000);
+import { mapActions } from 'vuex'
 
 export default {
   name: 'LobbyView',
@@ -62,16 +63,21 @@ export default {
         return this.$store.state.currentState;
       },
       set(value) {
-        this.$store.dispatch('updateState', value);
+        this.updateState(value);
       }
     }
   },
   methods: {
+    ...mapActions([
+      'updateState',
+      'createSession',
+    ]),
     getName(inputName) {
       this.playerName = inputName;
       this.showChooseWisely = true;
       document.getElementById('wise-input-id').blur();
       setTimeout(function(){ document.getElementById('wise-input-choose').focus(); }, 5000);
+      this.createSession(inputName);
     },
     getChoose(choose) {
       document.getElementById('wise-input-choose').blur();
