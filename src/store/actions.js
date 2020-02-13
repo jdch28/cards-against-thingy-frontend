@@ -61,9 +61,11 @@ export default {
       });
   },
 
-  joinGame({ commit }, gamePin, sessionToken) {
+  joinGame({ commit }, { pin, session }) {
+    console.log('Pin', pin);
+    console.log('sessionToken', session);
     let gameService = new GameService();
-    gameService.joinGame(gamePin, sessionToken).then(
+    gameService.joinGame(pin, session).then(
       ({ pin, status, sessions }) => {
         commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions });
         console.log('game joined');

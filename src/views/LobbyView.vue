@@ -25,7 +25,7 @@
         <p class="first-typewriter">Enter a valid game PIN</p>
         <div class="third-typewriter wise-input-container">
           <label> &gt; </label>
-          <input type="text" id="wise-input-id" class="wise-input" ref="search">
+          <input type="text" id="wise-input-id" class="wise-input" ref="search" v-on:keyup.enter="enterPin($event.target.value)">
         </div>
       </section>
     </transition>
@@ -78,6 +78,7 @@ export default {
       'updateState',
       'createSession',
       'createGame',
+      'joinGame',
     ]),
     getName(inputName) {
       this.playerName = inputName;
@@ -93,7 +94,7 @@ export default {
         this.newGame();
         return;
       }
-      this.joinGame();
+      this.showJoinGameView();
     },
     nextState() {
       this.currentState = 'LobbyView';
@@ -104,11 +105,14 @@ export default {
         this.buttonsEnabled = false;
       }
     },
-    joinGame() {
+    showJoinGameView() {
       if (this.buttonsEnabled) {
         this.showJoinGame = true;
         this.buttonsEnabled = false;
       }
+    },
+    enterPin(pin) {
+      this.joinGame({ pin: pin, session: this.session.token })
     }
   }
 }

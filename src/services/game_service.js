@@ -40,7 +40,7 @@ export default class GameService {
   }
 
   gameStatus(gamePin) {
-    const postUrl = `${BASE_URL}/games/${gamePin}`;
+    const postUrl = `${BASE_URL}/games.json/${gamePin}`;
 
     return new Promise((resolve, reject) => {
       axios({
@@ -58,14 +58,14 @@ export default class GameService {
   }
 
   joinGame(gamePin, sessionToken) {
-    const postUrl = `${BASE_URL}/games/${gamePin}/join?token=${sessionToken}`;
+    const postUrl = `${BASE_URL}/games/${gamePin}/join.json?token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {
       axios({
         method: 'POST',
         url: postUrl,
       }).then(
-        (data) => {
+        ({ data }) => {
           resolve(data);
         },
         (response) => {
