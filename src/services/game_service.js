@@ -11,7 +11,7 @@ export default class GameService {
         method: "POST",
         url: postUrl,
       }).then(
-        data => {
+        ({ data }) => {
           resolve(data);
         },
         response => {
@@ -22,14 +22,14 @@ export default class GameService {
   }
 
   createGame(sessionToken) {
-    const postUrl = `${BASE_URL}/games/?token=${sessionToken}`;
+    const postUrl = `${BASE_URL}/games.json/?token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {
       axios({
         method: 'POST',
         url: postUrl,
       }).then(
-        (data) => {
+        ({ data }) => {
           resolve(data);
         },
         (response) => {

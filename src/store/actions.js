@@ -14,7 +14,10 @@ export default {
     let gameService = new GameService();
     gameService.createSession(name).then(
       ({ token, name }) => {
-        commit('UPDATE_ROUND_RESULTS', { token: token, username: name });
+        commit('UPDATE_SESSION', {
+          token: token,
+          username: name
+        });
         console.log('session created');
       },
       () => {
@@ -30,8 +33,8 @@ export default {
     let gameService = new GameService();
     gameService.createGame(sessionToken).then(
       ({ pin }) => {
-        commit('UPDATE_ROUND_RESULTS', { pin: pin });
-        console.log('game created');
+        commit('UPDATE_GAME', { pin: pin });
+        console.log('game created, this is pin', pin);
       },
       () => {
         console.error('API: Failed to create game');

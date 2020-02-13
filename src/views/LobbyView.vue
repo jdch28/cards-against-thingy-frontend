@@ -21,30 +21,35 @@
     </transition>
 
     <transition name="fade">
-      <section v-if="showJoinGame" data-section="join-game">
-        <h1>Enter Game PIN</h1>
-        <input type="text">
+      <section v-if="showJoinGame" data-section="join-game" class="typewriter">
+        <p class="first-typewriter">Enter a valid game PIN</p>
+        <div class="third-typewriter wise-input-container">
+          <label> &gt; </label>
+          <input type="text" id="wise-input-id" class="wise-input" ref="search">
+        </div>
       </section>
     </transition>
 
     <transition name="fade">
       <section v-if="showGameLobby" data-section="game-lobby" class="typewriter">
+        <h2>Game PIN: {{game.pin}}</h2>
         <h2>Waiting for players</h2>
-        <h2>Game PIN: 1255</h2>
-        <!-- <ul>
-          <li>Anel has joined...</li>
+        <ul>
+          <!-- <li>Anel has joined...</li>
           <li>JD one has joined...</li>
-          <li>Bruno has joined...</li>
+          <li>Bruno has joined...</li> -->
         </ul>
-        <h2>Ready to begin.</h2> -->
+        <p class="loading-dots"></p>
+        <!-- <h2>Ready to begin.</h2> -->
       </section>
     </transition>
   </main>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 setTimeout(function(){ document.getElementById('wise-input-id').focus(); }, 5000);
-import { mapActions } from 'vuex'
 
 export default {
   name: 'LobbyView',
@@ -58,6 +63,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['game', 'session']),
     currentState: {
       get() {
         return this.$store.state.currentState;
@@ -71,6 +77,7 @@ export default {
     ...mapActions([
       'updateState',
       'createSession',
+      'createGame',
     ]),
     getName(inputName) {
       this.playerName = inputName;
@@ -82,6 +89,7 @@ export default {
     getChoose(choose) {
       document.getElementById('wise-input-choose').blur();
       if(choose == 1) {
+        this.createGame(this.session.token);
         this.newGame();
         return;
       }
