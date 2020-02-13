@@ -14,6 +14,10 @@ export default {
     commit('UPDATE_ROUND_RESULTS', state);
   },
 
+  updateSelectedCard({ commit }, state) {
+    commit('UPDATE_SELECTED_CARD', state);
+  },
+
   createSession({ commit }, name) {
     let gameService = new GameService();
     gameService.createSession(name).then(
@@ -29,7 +33,6 @@ export default {
       },
      )
       .finally(() => {
-
     });
   },
 
@@ -55,7 +58,6 @@ export default {
     gameService.gameStatus(gamePin).then(
       ({ pin, status, sessions }) => {
         commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions });
-        console.log('game status');
       },
       () => {
         console.error('API: Failed to get game status');

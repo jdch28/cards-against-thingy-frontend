@@ -7,12 +7,14 @@
 <script>
 import LobbyView from './views/LobbyView.vue'
 import PlayerSelectionView from './views/PlayerSelectionView.vue'
+import WaitingSentView from './views/WaitingSentView.vue'
 
 export default {
   name: 'App',
   components: {
     LobbyView,
-    PlayerSelectionView
+    PlayerSelectionView,
+    WaitingSentView
   },
   computed: {
     currentState: {
