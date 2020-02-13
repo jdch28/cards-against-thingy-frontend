@@ -1,20 +1,21 @@
 <template>
   <main class="player-selection-main">
-    <h1>
-      <span>Round {{roundState.index}}</span>
-      <small>Score: {{ score }}</small>
-    </h1>
+    <header-round :round="roundState.index" :score="score"/>
     <card :text="roundState.blackCard.text" isBlack="true" />
     <card v-for="white in hand" :key="white.id" :text="white.text" />
   </main>
 </template>
 
+
 <script>
 import Card from '../components/Card.vue'
+import HeaderRound from '../components/HeaderRound.vue'
+
 export default {
   name: 'PlayerSelectionhView',
   components: {
-    Card
+    Card,
+    HeaderRound,
   },
   data() {
     return {
@@ -43,19 +44,5 @@ export default {
 
   .card-selected {
     width: calc(100% - 2em);
-  }
-
-  h1 {
-    font-size: 1.8em;
-    font-weight: 900;
-    font-variant: small-caps;
-    margin: .1em 0 .6em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  h1 small {
-    font-size: 0.7em;
   }
 </style>
