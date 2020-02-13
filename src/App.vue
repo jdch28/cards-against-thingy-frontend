@@ -22,6 +22,14 @@ export default {
       set(value) {
         this.$store.dispatch('updateState', value);
       }
+    },
+    playerName: {
+      get() {
+        return this.$store.state.playerName;
+      },
+      set(value) {
+        this.$store.dispatch('updateName', value);
+      }
     }
   }
 }

@@ -1,14 +1,10 @@
 main {
   background-color: #121212;
+  height: 100vh;
   font-family: 'VT323', monospace;
   font-size: 1.2em;
   font-weight: 900;
   color: #ffffff;
-}
-
-.bottom-section {
-  margin-top: 20em;
-  /* display: none */
 }
 
 .wise-input-container {
@@ -40,14 +36,13 @@ main {
   overflow: hidden;
 }
 
-.typewriter p:nth-child(1) {
-  margin-top: 10em;
+.typewriter .first-typewriter {
   width: 10.5em;
   animation: type 2s steps(24, end), blink .5s step-end infinite alternate;
   animation-fill-mode: forwards;
 }
 
-.typewriter p:nth-child(2) {
+.typewriter .second-typewriter {
   font-size: 20px;
   width: 6.5em;
   opacity: 0;
@@ -56,7 +51,7 @@ main {
   animation-fill-mode: forwards;
 }
 
-.typewriter div {
+.typewriter .third-typewriter {
   font-size: 20px;
   width: 10em;
   opacity: 0;
