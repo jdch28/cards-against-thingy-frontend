@@ -14,6 +14,10 @@ export default {
     commit('UPDATE_ROUND_RESULTS', state);
   },
 
+  updateSelectedCard({ commit }, state) {
+    commit('UPDATE_SELECTED_CARD', state);
+  },
+
   createSession({ commit }, name) {
     let gameService = new GameService();
     gameService.createSession(name).then(

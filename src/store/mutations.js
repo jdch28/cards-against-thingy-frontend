@@ -23,4 +23,8 @@ export default {
   UPDATE_GAME(state, game) {
     state.game = game;
   },
+
+  UPDATE_SELECTED_CARD(state, selectedId) {
+    state.selectedCard = selectedId;
+  },
 };

@@ -31,8 +31,9 @@ export default {
   display: flex;
   background-color: #fff;
   border-radius: .5em;
-  width: 8em;
-  height: 10em;
+  width: calc(100% - 4em);
+  margin-left: 2em;
+  height: auto;
   outline: none;
   text-decoration: none;
   overflow-wrap: break-word;
@@ -51,5 +52,9 @@ export default {
 
 .card-text__white {
   color: white;
+}
+
+.card-selected .card-text {
+  color: #C62828;
 }
 </style>
