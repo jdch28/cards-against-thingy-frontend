@@ -35,12 +35,11 @@
         <h2>Game PIN: {{game.pin}}</h2>
         <h2>Waiting for players</h2>
         <ul>
-          <!-- <li>Anel has joined...</li>
-          <li>JD one has joined...</li>
-          <li>Bruno has joined...</li> -->
+          <li v-for="player in game.sessions" :key="player.key">
+              <label>&gt; {{player.name}}</label>
+          </li>
         </ul>
         <p class="loading-dots"></p>
-        <!-- <h2>Ready to begin.</h2> -->
       </section>
     </transition>
   </main>
@@ -59,7 +58,6 @@ export default {
       showChooseWisely: false,
       showJoinGame: false,
       showGameLobby: false,
-      buttonsEnabled: true,
     }
   },
   computed: {
@@ -100,19 +98,14 @@ export default {
       this.currentState = 'LobbyView';
     },
     newGame() {
-      if (this.buttonsEnabled) {
-        this.showGameLobby = true;
-        this.buttonsEnabled = false;
-      }
+      this.showGameLobby = true;
     },
     showJoinGameView() {
-      if (this.buttonsEnabled) {
-        this.showJoinGame = true;
-        this.buttonsEnabled = false;
-      }
+      this.showJoinGame = true;
     },
     enterPin(pin) {
       this.joinGame({ pin: pin, session: this.session.token })
+      this.showGameLobby = true;
     }
   }
 }
