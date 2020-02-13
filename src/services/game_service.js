@@ -40,14 +40,14 @@ export default class GameService {
   }
 
   gameStatus(gamePin) {
-    const postUrl = `${BASE_URL}/games.json/${gamePin}`;
+    const postUrl = `${BASE_URL}/games/${gamePin}/status.json`;
 
     return new Promise((resolve, reject) => {
       axios({
         method: 'GET',
         url: postUrl,
       }).then(
-        (data) => {
+        ({data}) => {
           resolve(data);
         },
         (response) => {

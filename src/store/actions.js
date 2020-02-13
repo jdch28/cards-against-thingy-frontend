@@ -29,7 +29,6 @@ export default {
       },
      )
       .finally(() => {
-
     });
   },
 
@@ -55,7 +54,6 @@ export default {
     gameService.gameStatus(gamePin).then(
       ({ pin, status, sessions }) => {
         commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions });
-        console.log('game status');
       },
       () => {
         console.error('API: Failed to get game status');
