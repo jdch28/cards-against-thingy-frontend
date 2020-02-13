@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main>
     <header></header>
 
     <section data-section="otra" class="typewriter">
@@ -38,7 +38,7 @@
     <div v-if="false">
       <button v-on:click="nextState">Next Page</button>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
