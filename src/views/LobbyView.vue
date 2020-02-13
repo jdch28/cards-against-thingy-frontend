@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="lobby-main">
     <section data-section="sign-up" class="typewriter" v-if="showSignUp">
       <p class="first-typewriter">Cards Against Developers</p>
       <p class="second-typewriter">Type your name</p>

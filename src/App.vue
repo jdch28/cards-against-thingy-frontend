@@ -6,13 +6,13 @@
 
 <script>
 import LobbyView from './views/LobbyView.vue'
-import PlayerView from './views/PlayerView.vue'
+import PlayerSelectionView from './views/PlayerSelectionView.vue'
 
 export default {
   name: 'App',
   components: {
     LobbyView,
-    PlayerView
+    PlayerSelectionView
   },
   computed: {
     currentState: {

@@ -1,17 +1,25 @@
 <template>
-  <div class="card" :class="{ 'card-black': isBlack}">
-     <span class="card-text" :class="{ 'card-text__white': isBlack}">{{ text }}</span>
+  <div class="card" :class="card_class">
+     <span class="card-text" :class="{ 'card-text__white': isBlack }">{{ formatted_text }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CzarView',
+  name: 'Card',
   props: {
     text: String,
     isBlack: {
       type: Boolean,
       default: false,
+    }
+  },
+  computed: {
+    formatted_text() {
+      return this.text.replace('%blank%', '_______');
+    },
+    card_class() {
+      return this.isBlack ? 'card-black' : 'card-white';
     }
   }
 }
@@ -22,7 +30,7 @@ export default {
 .card {
   display: flex;
   background-color: #fff;
-  border-radius: 4px;
+  border-radius: .5em;
   width: 8em;
   height: 10em;
   outline: none;
@@ -38,7 +46,7 @@ export default {
 .card-text {
   color: black;
   width: 100%;
-  padding: 0.5em 0.5em;
+  padding: 1em;
 }
 
 .card-text__white {

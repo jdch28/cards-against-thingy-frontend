@@ -1,5 +1,7 @@
 main {
   padding: 3%;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial Narrow', sans-serif;
+  font-weight: 500;
 }
 
 .page-container {
