@@ -1,11 +1,13 @@
 <template>
-  <section data-section="join-game" class="typewriter">
-    <p class="first-typewriter">Enter a valid game PIN</p>
-    <div class="third-typewriter wise-input-container">
-      <label> &gt; </label>
-      <input type="text" id="wise-input-id" class="wise-input" ref="search" v-on:keyup.enter="enterPin($event.target.value)">
-    </div>
-  </section>
+  <transition name="fade">
+    <section data-section="join-game" class="typewriter">
+      <p class="first-typewriter">Enter a valid game PIN</p>
+      <div class="third-typewriter wise-input-container">
+        <label> &gt; </label>
+        <input type="text" id="wise-input-id" class="wise-input" ref="search" v-on:keyup.enter="enterPin($event.target.value)">
+      </div>
+    </section>
+  </transition>
 </template>
 
 <script>

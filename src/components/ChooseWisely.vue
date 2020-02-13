@@ -1,12 +1,14 @@
 <template>
-  <section data-section="choose-wisely" class="typewriter">
-    <p class="first-typewriter">Choose one option wisely</p>
-    <p class="second-typewriter">1- New &#124; 2- Join</p>
-    <div class="third-typewriter wise-input-container">
-      <label> &gt; </label>
-      <input type="text" id="wise-input-choose" class="wise-input" ref="search" v-on:keyup.enter="getChoose($event.target.value)">
-    </div>
-  </section>
+  <transition name="fade">
+    <section data-section="choose-wisely" class="typewriter">
+      <p class="first-typewriter">Choose one option wisely</p>
+      <p class="second-typewriter">1- New &#124; 2- Join</p>
+      <div class="third-typewriter wise-input-container">
+        <label> &gt; </label>
+        <input type="text" id="wise-input-choose" class="wise-input" ref="search" v-on:keyup.enter="getChoose($event.target.value)">
+      </div>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -19,7 +21,7 @@ export default {
   methods: {
     ...mapActions([
       'createGame',
-      'updateLobbyState',
+      'addLobbySubview',
     ]),
     getChoose(choose) {
       document.getElementById('wise-input-choose').blur();
@@ -27,7 +29,7 @@ export default {
         this.createGame(this.session.token);
         return;
       }
-      this.updateLobbyState('JoinGame')
+      this.addLobbySubview('JoinGame')
     },
   }
 

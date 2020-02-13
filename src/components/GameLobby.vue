@@ -1,4 +1,5 @@
 <template>
+ <transition name="fade">
   <section data-section="game-lobby" class="typewriter">
     <h2>Game PIN: {{game.pin}}</h2>
     <h2>Waiting for players</h2>
@@ -9,6 +10,7 @@
     </ul>
     <p class="loading-dots"></p>
   </section>
+  </transition>
 </template>
 
 <script>

@@ -9,9 +9,7 @@
       </div>
     </section>
 
-    <transition name="fade">
-      <component :is="lobbyState"></component>
-    </transition>
+    <component v-for="subView in lobbySubviews" :key="subView" :is="subView" />
   </main>
 </template>
 
@@ -36,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lobbyState']),
+    ...mapState(['lobbySubviews']),
     currentState: {
       get() {
         return this.$store.state.currentState;
@@ -49,11 +47,11 @@ export default {
   methods: {
     ...mapActions([
       'createSession',
-      'updateLobbyState'
+      'addLobbySubview'
     ]),
     getName(inputName) {
       this.playerName = inputName;
-      this.updateLobbyState('ChooseWisely')
+      this.addLobbySubview('ChooseWisely')
       document.getElementById('wise-input-id').blur();
       setTimeout(function(){ document.getElementById('wise-input-choose').focus(); }, 5000);
       this.createSession(inputName);

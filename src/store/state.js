@@ -1,7 +1,7 @@
 
 export default {
   currentState: 'LobbyView',
-  lobbyState: '',
+  lobbySubviews: Array(),
   session: {
     token: '',
     username: '',

@@ -4,8 +4,8 @@ export default {
     state.currentState = current;
   },
 
-  UPDATE_LOBBY_STATE(state, lobbyState) {
-    state.lobbyState = lobbyState;
+  UPDATE_LOBBY_SUBVIEWS_STATE(state, lobbySubview) {
+    state.lobbySubviews.push(lobbySubview);
   },
 
   UPDATE_ROUND_RESULTS(state, current) {
