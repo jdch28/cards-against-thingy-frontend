@@ -45,7 +45,8 @@ export default {
       'updatePlayerHand',
       'plebSubmit',
       'updateSelectedCardId',
-      'setupRound'
+      'setupRound',
+      'gameStatus'
     ]),
 
     tapCard(cardId) {
@@ -78,14 +79,24 @@ export default {
     },
     submitWinner(cardId) {
       let roundService = new RoundService();
-       roundService.submitWinner(this.game.pin, this.session.token, cardId).then(() => {
+      let that = this;
+      roundService.submitWinner(this.game.pin, this.session.token, cardId).then(
+        ({ game_status }) => {
+          if (game_status === GAME_COMPLETE) {
+            this.gameStatus({
+              gamePin: pin,
+              onFinally: function(){
+                that.updateState('GameResultView');
+              }
+            });
+          } else {
             this.setupRound({gamePin: this.game.pin, token:this.session.token, skipResultView: false});
-           },
-           () => {
-             console.error('API: Failed to send a card');
-           },
-         )
-         .finally(() => {});
+          }
+        },
+        () => {
+          console.error('API: Failed to send a card');
+        },
+      ).finally(() => {});
     }
   }
 }
