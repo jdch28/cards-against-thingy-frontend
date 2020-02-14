@@ -11,10 +11,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Card from '../components/Card.vue'
 import CardList from '../components/CardList.vue'
 import HeaderRound from '../components/HeaderRound.vue'
+import RoundService from '../services/round_service.js';
 
 export default {
   name: 'PlayerSelectionView',
@@ -29,6 +30,9 @@ export default {
       player: this.$store.state.player
     }
   },
+  computed: {
+    ...mapState(['session', 'game', 'player'])
+  },
   methods: {
     ...mapActions([
       'updateState',
@@ -36,7 +40,18 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
-      this.updateState('PlayerWaitingView');
+
+      let roundService = RoundService();
+      roundService.submitCard(this.game.pin,
+                             this.session.token,
+                             this.player.selectedCard.id).then(() => {
+          this.updateState('PlayerWaitingView');
+          console.log('session created');
+        },
+        () => { console.error('API: Failed to create session'); },
+      )
+        .finally(() => {
+      });
     }
   }
 }
