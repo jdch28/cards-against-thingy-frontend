@@ -40,7 +40,7 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
-
+      // TODO: actions.plebSubmit(cardId)
       let roundService = RoundService();
       roundService.submitCard(this.game.pin,
                              this.session.token,

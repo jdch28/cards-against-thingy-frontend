@@ -88,4 +88,83 @@ export default {
 
       });
   },
+
+
+  // TODO: todos estos metodos
+
+  // setupRound() {
+  //   let roundService = new RoundService(),
+  //     current = roundService.getCurrent();
+
+  //   if (current.czar_session === current_session) {
+  //     // setup czar view
+  //   } else {
+  //     // setup player selection view
+  //     this.czarStandby()
+  //   }
+
+  //   // show round result (or straight to play if first round)
+  // }
+
+  // plebStandby() {
+  //   let roundService = new RoundService(),
+  //     status = {};
+
+  //   while (status.label === 'waiting for plebs') {
+  //     // cada 0.5 segundos
+  //     status = roundService.status();
+  //   }
+
+  //   // update view to waiting for czar
+
+  //   while (status.label === 'waiting for czar') {
+  //     // cada 0.5 segundos
+  //     status = roundService.status();
+  //   }
+
+  //   // make into case
+  //   if (status.label === 'complete') {
+  //     // show scoreboard view
+  //   } else if (status.label === 'waiting for plebs') {
+  //     this.setupRound();
+  //   } else {
+  //     // nope lol
+  //   }
+  // }
+
+  // czarStandby() {
+  //   let roundService = new RoundService(),
+  //     status = {label: 'waiting for plebs'};
+
+  //   while (status.label === 'waiting for plebs') {
+  //     // cada 0.5 segundos
+  //     status = roundService.status();
+  //   }
+
+  //   if (status.label === 'waiting for czar') {
+  //     roundService.requestRoundCandidates();
+  //     // show czar selection view
+  //   } else {
+  //     // nope lol
+  //   }
+  // }
+
+  // plebSubmit(cardId) {
+  //   let roundService = new RoundService();
+
+  //   roundService.submitCandidate(cardId);
+
+  //   this.plebStandby();
+  // }
+
+  // czarSubmit(cardId) {
+  //   let roundService = new RoundService();
+
+  //   roundService.submitWinner(cardId);
+
+  //   this.setupRound();
+  // }
+
+
+
 };
