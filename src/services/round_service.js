@@ -58,7 +58,7 @@ export default class RoundService {
     });
   }
 
-  submitCard(gamePin, sessionToken, cardId ) {
+  submitCandidate(gamePin, sessionToken, cardId) {
     const postUrl = `${BASE_URL}/rounds/submit_card.json?card_id=${cardId}&pin=${gamePin}&token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {

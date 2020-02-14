@@ -50,7 +50,7 @@ export default {
             if(status === 'ready') {
               this.loadingGame = true;
               clearInterval(this.pulling);
-              this.setupRound({gamePin: gamePin, token: token});
+              this.setupRound({gamePin: gamePin, token: token, skipResultView: true});
             }
           },
           () => {

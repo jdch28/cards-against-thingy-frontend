@@ -1,6 +1,6 @@
 import GameService from '../services/game_service.js';
 import RoundService from '../services/round_service.js';
-import { ROUND_WAITING_FOR_CZAR, ROUND_WAITING_FOR_PLEBS, GAME_WAITING_FOR_PLEBS, GAME_COMPLETE } from '../constants.js';
+import { ROUND_WAITING_FOR_CZAR, ROUND_WAITING_FOR_PLEBS, GAME_COMPLETE } from '../constants.js';
 
 export default {
   updateState({ commit }, state) {
@@ -99,85 +99,94 @@ export default {
     roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round, black_card, round_number}) => {
         commit('UPDATE_ROUND', { blackCard: black_card, round: round_number});
         commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
-      if(czar_token === gameData.token) {
-        commit('UPDATE_STATE', 'CzarView');
-      } else {
-        commit('UPDATE_STATE', 'PlayerSelectionView');
-        dispatch('czarStandby', gameData);
-      }
+        commit('UPDATE_CURRENT_CZAR', czar_token);
+        if(gameData.skipResultView) {
+          dispatch('showPlayViews', { czar_token: czar_token, gameData: gameData });
+        } else {
+          commit('UPDATE_STATE', 'RoundResultView');
+        }
     });
-
     // show round result (or straight to play if first round)
   },
 
-  plebStandby({ commit }, params) {
-    let roundService = new RoundService(),
-      roundStatus = '',
-      gameStatus = '',
-      pulling;
-
-    while (roundStatus === ROUND_WAITING_FOR_PLEBS) {
-      // cada 0.5 segundos
-      roundService.status(params.pin, params.token).then((round_status, game_status) => {
-        roundStatus = round_status;
-        gameStatus = game_status;
-      });
-    }
-
-    // update view to waiting for czar
-    commit('UPATE_ROUND_STATUS', ROUND_WAITING_FOR_CZAR)
-    commit('UPDATE_STATE', 'PlayerWaitingView');
-
-    pulling = setInterval(() => {
-      if(roundStatus === ROUND_WAITING_FOR_CZAR) {
-        roundService.status(params.pin, params.token).then((round_status, game_status) => {
-          roundStatus = round_status;
-          gameStatus = game_status;
-        });
-     }else{
-        clearInterval(pulling);
-     }
-    }, 500)
-
-    // make into case
-    if (gameStatus === GAME_COMPLETE) {
-      commit('UPDATE_STATE', 'PlayerWaitingView');
-    } else if (gameStatus === GAME_WAITING_FOR_PLEBS) {
-      this.setupRound();
+  showPlayViews({commit, dispatch}, { czar_token, gameData }) {
+    if (czar_token === gameData.token) {
+      commit('UPDATE_STATE', 'CzarView');
+      dispatch('czarStandby', gameData);
     } else {
-      console.error('Something went very wrong');
+      commit('UPDATE_STATE', 'PlayerSelectionView');
+      dispatch('plebStandby', gameData);
     }
   },
 
+  plebStandby({ commit, dispatch }, params) {
+    let roundService = new RoundService(),
+      roundStatus = '',
+      pullingRound,
+      gameStatus = '',
+      pullingGame;
+
+    pullingRound = setInterval(() => {
+      roundService.status(params.gamePin, params.token).then(({ round_status }) => {
+        roundStatus = round_status;
+        if (roundStatus !== ROUND_WAITING_FOR_PLEBS) {
+          clearInterval(pullingRound);
+          commit('UPDATE_ROUND_STATUS', ROUND_WAITING_FOR_CZAR)
+          commit('UPDATE_STATE', 'PlayerWaitingView');
+
+          pullingGame = setInterval(() => {
+            roundService.status(params.gamePin, params.token).then(({ round_status, game_status }) => {
+              roundStatus = round_status;
+              gameStatus = game_status;
+
+              if (gameStatus === GAME_COMPLETE) {
+                clearInterval(pullingGame);
+                commit('UPDATE_STATE', 'GameResultView');
+              } else if (roundStatus !== ROUND_WAITING_FOR_CZAR) {
+                clearInterval(pullingGame);
+                dispatch('setupRound', params);
+              }
+            });
+          }, 500)
+        }
+      });
+    }, 500)
+
+    // update view to waiting for czar
+
+
+    // make into case
+  },
+
+  // type: "Round"
+  // pin: "AA84"
+  // round_status: "waiting_for_plebs"
+  // game_status: "ready"
   czarStandby({ commit }, params) {
     let roundService = new RoundService(),
       roundStatus = '',
       pulling;
-
-
+      console.log('round_status');
       pulling = setInterval(() => {
-        if(roundStatus === ROUND_WAITING_FOR_PLEBS) {
-          roundService.status(params.gamePin, params.token).then((round_status) => {
-            roundStatus = round_status;
-          });
-       }else{
-          clearInterval(pulling);
-       }
-      }, 500)
-
-    if (roundStatus === ROUND_WAITING_FOR_CZAR) {
-        roundService.requestRoundCandidates().then((cards) => {
-          commit('UPDATE_ROUND_CANDIDATE_CARDS', cards);
-          commit('UPDATE_STATE', 'CzarSelectionView');
+        roundService.status(params.gamePin, params.token).then(({ round_status }) => {
+          roundStatus = round_status;
+          if (roundStatus === ROUND_WAITING_FOR_CZAR) {
+            clearInterval(pulling);
+            console.log('4--------')
+            roundService.requestRoundCandidates().then((cards) => {
+              console.log('5--------')
+              commit('UPDATE_ROUND_CANDIDATE_CARDS', cards);
+              commit('UPDATE_STATE', 'CzarSelectionView');
+            });
+          }
         });
-    } else {
-      console.error('Something went very wrong');
-    }
+      }, 5000)
+
   },
 
   plebSubmit({ commit, dispatch }, params) {
     let roundService = new RoundService();
-      roundService.submitCandidate(params.pin, params.token, params.cardId).then(() => {
+      roundService.submitCandidate(params.gamePin, params.token, params.cardId).then(() => {
           commit('UPDATE_STATE', 'PlayerWaitingView');
           dispatch('plebStandby', params);
         },

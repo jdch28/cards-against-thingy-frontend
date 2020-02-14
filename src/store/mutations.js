@@ -42,6 +42,10 @@ export default {
     state.game = game;
   },
 
+  UPDATE_CURRENT_CZAR(state, czar) {
+    state.game.czar = czar;
+  },
+
   UPDATE_SELECTED_CARD_ID(state, selectedCard) {
     state.player.selectedCard.id = selectedCard;
   },

@@ -1,6 +1,6 @@
 
 export default {
-  currentState: 'GameResultView',
+  currentState: 'LobbyView',
   lobbySubviews: Array(),
   session: {
     token: '123',
@@ -8,6 +8,7 @@ export default {
   },
   game: {
     pin: 0,
+    czarToken: '',
     status: 'waiting',
     sessions: []
   },

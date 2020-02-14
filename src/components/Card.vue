@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="card_class">
-     <span class="card-text" :class="{ 'card-text__white': isBlack }">{{ formatted_text }}</span>
+     <span class="card-text" :class="{ 'card-text__white': isBlack }">{{ text }}</span>
   </div>
 </template>
 
@@ -15,9 +15,6 @@ export default {
     }
   },
   computed: {
-    formatted_text() {
-      return this.text.replace('%blank%', '_______');
-    },
     card_class() {
       return this.isBlack ? 'card-black' : 'card-white';
     }

@@ -5,7 +5,7 @@
     <section v-if="roundState.status === waitingForPlebs" class="waiting-for-plebs__section">
       <h2>Your play:</h2>
 
-      <card :text="roundState.blackCard.text" :isBlack="true" />
+      <card :text="roundState.blackCard" :isBlack="true" />
       <card :text="player.selectedCard.text" />
 
       <h2>Waiting for other players...</h2>
@@ -13,17 +13,17 @@
 
     <section v-else class="waiting-for-czar__section">
       <h2>Waiting for czar selection... </h2>
-      <card :text="roundState.blackCard.text" :isBlack="true" />
+      <card :text="roundState.blackCard" :isBlack="true" />
 
-      <h2>Options by other players:</h2>
-      <card-list :cards="roundState.playedCards"/>
+      <!-- <h2>Options by other players:</h2>
+      <card-list :cards="roundState.candidateCards"/> -->
     </section>
   </main>
 </template>
 
 <script>
 import Card from '../components/Card.vue'
-import CardList from '../components/CardList.vue'
+// import CardList from '../components/CardList.vue'
 import HeaderRound from '../components/HeaderRound.vue'
 import { ROUND_WAITING_FOR_PLEBS } from '../constants.js';
 
@@ -31,7 +31,7 @@ export default {
   name: 'PlayerWaitingView',
   components: {
     Card,
-    CardList,
+    // CardList,
     HeaderRound
   },
   data() {
@@ -45,9 +45,6 @@ export default {
 </script>
 
 <style scoped>
-  .waiting-for-czar__section {
-    display: none;
-  }
   h2 {
     text-align: center;
     font-size: 1.3em;

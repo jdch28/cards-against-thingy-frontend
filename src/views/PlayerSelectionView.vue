@@ -6,7 +6,7 @@
 
     <p class="help">Tap twice to confirm your selection</p>
 
-    <card-list :cards="player.hand" :isClickable="true" v-on:submit-selected-card="submitSelected"/>
+    <card-list :cards="player.hand" :isClickable="true" />
   </main>
 </template>
 
@@ -35,7 +35,8 @@ export default {
   methods: {
     ...mapActions([
       'updateState',
-      'updatePlayerHand'
+      'updatePlayerHand',
+      'plebSubmit'
     ]),
     submitSelected() {
       this.updatePlayerHand();

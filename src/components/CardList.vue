@@ -27,15 +27,36 @@ export default {
     },
   },
   computed: {
-    ...mapState(['player'])
+    ...mapState(['session', 'game', 'player'])
   },
   methods: {
     ...mapActions([
+      'updateState',
+      'updatePlayerHand',
+      'plebSubmit',
       'updateSelectedCardId'
     ]),
+
     tapCard(cardId) {
       if(this.player.selectedCard.id == cardId){
-        this.$emit('submit-selected-card', cardId);
+        // this.$emit('submit-selected-card', cardId);
+        this.updatePlayerHand();
+        let params = { gamePin: this.game.pin,
+                      token: this.session.token,
+                      cardId: this.player.selectedCard.id }
+
+        this.plebSubmit(params);
+        // let roundService = new RoundService();
+        // roundService.submitCandidate(this.game.pin,
+        //                       this.session.token,
+        //                       this.player.selectedCard.id).then(() => {
+        //     this.updateState('PlayerWaitingView');
+        //     console.log('session created');
+        //   },
+        //   () => { console.error('API: Failed to create session'); },
+        // )
+        //   .finally(() => {
+        // });
       } else {
         this.updateSelectedCardId(cardId);
       }
