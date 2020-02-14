@@ -79,7 +79,7 @@ export default {
     submitWinner(cardId) {
       let roundService = new RoundService();
        roundService.submitWinner(this.game.pin, this.session.token, cardId).then(() => {
-            this.setupRound({gamePin: this.game.pin, token:this.session.token});
+            this.setupRound({gamePin: this.game.pin, token:this.session.token, skipResultView: false});
            },
            () => {
              console.error('API: Failed to send a card');

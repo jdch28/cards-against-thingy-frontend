@@ -45,8 +45,8 @@ export default {
       this.pulling = setInterval(() => {
         let gameService = new GameService();
         gameService.gameStatus(gamePin, token).then(
-          ({ pin, status, sessions, round_data }) => {
-            this.updateGame({pin: pin, status: status, sessions: sessions, round_data: round_data});
+          ({ pin, status, sessions, scores }) => {
+            this.updateGame({pin: pin, status: status, sessions: sessions, scores: scores});
             if(status === 'ready') {
               this.loadingGame = true;
               clearInterval(this.pulling);

@@ -44,11 +44,18 @@ export default {
     state.session = session;
   },
 
-  UPDATE_GAME(state, game) {
-    state.game = game;
+  UPDATE_GAME(state, {pin, status, sessions, scores}) {
+    state.game.pin = pin;
+    state.game.status = status;
+    state.game.sessions = sessions;
+    state.game.scores = scores;
   },
 
-  UPDATE_CURRENT_CZAR(state, czar) {
+  UPDATE_PIN_GAME(state, pin) {
+    state.game.pin = pin;
+  },
+
+  UPDATE_GAME_CURRENT_CZAR(state, czar) {
     state.game.czar = czar;
   },
 

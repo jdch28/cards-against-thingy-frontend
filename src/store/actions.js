@@ -41,7 +41,7 @@ export default {
     let gameService = new GameService();
     gameService.createGame(sessionToken).then(
       ({ pin }) => {
-        commit('UPDATE_GAME', { pin: pin });
+        commit('UPDATE_PIN_GAME', pin);
         commit('UPDATE_LOBBY_SUBVIEWS_STATE', 'GameLobby');
         console.log('game created, this is pin', pin);
       },
@@ -97,7 +97,7 @@ export default {
         commit('UPDATE_ROUND', { blackCard: black_card, round: round_number });
         commit('UPDATE_WINNER', last_round.winner);
         commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
-        commit('UPDATE_CURRENT_CZAR', czar_token);
+        commit('UPDATE_GAME_CURRENT_CZAR', czar_token);
 
         if(gameData.skipResultView) {
           console.log('JD is so rude', gameData.skipResultView);
@@ -142,7 +142,9 @@ export default {
 
               if (gameStatus === GAME_COMPLETE) {
                 clearInterval(pullingGame);
-                commit('UPDATE_STATE', 'GameResultView');
+                dispatch('gameStatus', {
+                      gamePin: params.gamePin,
+                      onFinally: function(){ commit('UPDATE_STATE', 'GameResultView');}});
               } else if (roundStatus !== ROUND_WAITING_FOR_CZAR) {
                 clearInterval(pullingGame);
                 dispatch('setupRound', params);
