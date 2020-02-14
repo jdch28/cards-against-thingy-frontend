@@ -76,8 +76,8 @@ export default class RoundService {
     });
   }
 
-  submitWinner(gamePin, sessionToken, winnerToken) {
-    const postUrl = `${BASE_URL}/rounds/submit_winner.json?winner_token=${winnerToken}&pin=${gamePin}&token=${sessionToken}`;
+  submitWinner(gamePin, sessionToken, cardId) {
+    const postUrl = `${BASE_URL}/rounds/submit_winner.json?winner_id=${cardId}&pin=${gamePin}&token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {
       axios({

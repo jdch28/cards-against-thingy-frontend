@@ -11,10 +11,6 @@ export default {
     commit('UPDATE_LOBBY_SUBVIEWS_STATE', state);
   },
 
-  fetchRoundResults({ commit }, state) {
-    commit('UPDATE_ROUND_RESULTS', state);
-  },
-
   updateSelectedCardId({ commit }, state) {
     commit('UPDATE_SELECTED_CARD_ID', state);
   },
@@ -97,21 +93,25 @@ export default {
   setupRound({commit, dispatch}, gameData) {
     let roundService = new RoundService();
     roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round, black_card, round_number}) => {
+        commit('UPDATE_OLD_STATE');
         commit('UPDATE_ROUND', { blackCard: black_card, round: round_number });
         commit('UPDATE_WINNER', last_round.winner);
         commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
         commit('UPDATE_CURRENT_CZAR', czar_token);
+
         if(gameData.skipResultView) {
-          dispatch('showPlayViews', { czar_token: czar_token, gameData: gameData });
+          console.log('JD is so rude', gameData.skipResultView);
+          dispatch('showPlayViews', { czar: czar_token, gameData: gameData });
         } else {
+          console.log('JD is actually kinda nice', gameData.skipResultView);
           commit('UPDATE_STATE', 'RoundResultView');
         }
     });
     // show round result (or straight to play if first round)
   },
 
-  showPlayViews({commit, dispatch}, { czar_token, gameData }) {
-    if (czar_token === gameData.token) {
+  showPlayViews({commit, dispatch}, { czar, gameData }) {
+    if (czar === gameData.token) {
       commit('UPDATE_STATE', 'CzarView');
       dispatch('czarStandby', gameData);
     } else {

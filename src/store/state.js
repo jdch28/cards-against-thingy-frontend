@@ -8,10 +8,15 @@ export default {
   },
   game: {
     pin: 0,
-    czarToken: '',
+    czar: '',
     status: 'waiting',
     sessions: [],
     scores: []
+  },
+  oldState: {
+    blackCard: '',
+    czar: '',
+    round: 0
   },
   player: {
     score: 2,

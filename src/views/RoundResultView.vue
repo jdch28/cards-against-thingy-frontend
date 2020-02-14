@@ -1,11 +1,11 @@
 <template>
   <main>
-    <header-round :round="roundState.index" :score="player.score"/>
+    <header-round :round="oldState.round" :score="player.score"/>
 
     <h1>{{ message }}</h1>
 
     <div class="round-result__card-container">
-      <card :text="roundState.blackCard" :isBlack="true" />
+      <card :text="oldState.blackCard" :isBlack="true" />
       <card :text="roundWinner.card" />
       <button v-on:click="swapView">&raquo;</button>
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Card from '../components/Card.vue'
 import HeaderRound from '../components/HeaderRound.vue'
 
@@ -25,17 +25,19 @@ export default {
   },
   data() {
     return {
-      player: this.$store.state.player,
-      roundState: this.$store.state.roundState,
-      roundWinner: this.$store.state.roundWinner,
-      session: this.$store.state.session,
-      game: this.$store.state.game,
       successMsg: "You win this round!"
     }
   },
   computed: {
+    ...mapState([
+      'oldState',
+      'roundWinner',
+      'game',
+      'player',
+      'session'
+    ]),
     message() {
-      if ( this.game.czarToken === this.session.token ) {
+      if ( this.oldState.czar === this.session.token ) {
         return `You chose ${this.roundWinner.name} as a winner.`;
       } else if ( this.roundWinner.token === this.session.token ) {
         return this.successMsg;
@@ -49,7 +51,7 @@ export default {
       'showPlayViews'
     ]),
     swapView() {
-      this.showPlayViews({czarToken: this.game.czarToken, gameData: {gamePin: this.game.pin, token: this.session.token}});
+      this.showPlayViews({czar: this.game.czar, gameData: {gamePin: this.game.pin, token: this.session.token}});
     }
   }
 }

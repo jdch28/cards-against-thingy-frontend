@@ -8,10 +8,6 @@ export default {
     state.lobbySubviews.push(lobbySubview);
   },
 
-  UPDATE_ROUND_RESULTS(state, current) {
-    state.roundWinner = current.winner;
-  },
-
   UPDATE_ROUND_STATUS(state, status) {
     state.roundState.status = status;
   },
@@ -20,7 +16,13 @@ export default {
     state.roundState.candidateCards = candidateCards;
   },
 
-  UPDATE_ROUND(state, { blackCard, round }) {
+  UPDATE_OLD_STATE(state) {
+    state.oldState.blackCard = state.roundState.blackCard;
+    state.oldState.czar = state.game.czar;
+    state.oldState.round = state.roundState.index;
+  },
+
+   UPDATE_ROUND(state, { blackCard, round }) {
     state.roundState.blackCard = blackCard;
     state.roundState.index = round;
   },
