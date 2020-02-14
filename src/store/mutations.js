@@ -16,10 +16,11 @@ export default {
     state.roundState.candidateCards = candidateCards;
   },
 
-  UPDATE_OLD_STATE(state) {
-    state.oldState.blackCard = state.roundState.blackCard;
-    state.oldState.czar = state.game.czar;
-    state.oldState.round = state.roundState.index;
+  UPDATE_OLD_STATE(state, oldState) {
+    console.log("UPDATE_OLD_STATE", state);
+    //var oldState = {blackCard: state.roundState.blackCard, czar: state.game.czar, round: state.roundState.index};
+    state.oldState = oldState;
+    console.log("UPDATE_OLD_STATE", state);
   },
 
    UPDATE_ROUND(state, { blackCard, round }) {

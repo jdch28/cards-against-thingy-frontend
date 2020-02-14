@@ -37,7 +37,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['session', 'game', 'player'])
+    ...mapState(['session', 'game', 'player', 'roundState'])
   },
   methods: {
     ...mapActions([
@@ -52,9 +52,11 @@ export default {
       if(this.player.selectedCard.id == cardId){
         // this.$emit('submit-selected-card', cardId);
         this.updatePlayerHand();
+        var oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
         let params = { gamePin: this.game.pin,
                       token: this.session.token,
-                      cardId: this.player.selectedCard.id }
+                      cardId: this.player.selectedCard.id,
+                      oldState: oldState}
 
         this.plebSubmit(params);
         // let roundService = new RoundService();
@@ -79,7 +81,8 @@ export default {
     submitWinner(cardId) {
       let roundService = new RoundService();
        roundService.submitWinner(this.game.pin, this.session.token, cardId).then(() => {
-            this.setupRound({gamePin: this.game.pin, token:this.session.token, skipResultView: false});
+            var oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
+            this.setupRound({gamePin: this.game.pin, token:this.session.token, skipResultView: false, oldState: oldState});
            },
            () => {
              console.error('API: Failed to send a card');

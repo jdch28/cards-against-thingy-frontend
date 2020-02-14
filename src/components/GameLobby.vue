@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['game', 'session']),
+    ...mapState(['game', 'session', 'roundState']),
   },
   methods: {
     ...mapActions(['gameStatus', 'updateState', 'updateGame', 'setupRound']),
@@ -50,7 +50,8 @@ export default {
             if(status === 'ready') {
               this.loadingGame = true;
               clearInterval(this.pulling);
-              this.setupRound({gamePin: gamePin, token: token, skipResultView: true});
+              var oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
+              this.setupRound({gamePin: gamePin, token: token, skipResultView: true, oldState: oldState});
             }
           },
           () => {
