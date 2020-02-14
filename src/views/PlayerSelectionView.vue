@@ -26,8 +26,7 @@ export default {
   },
   data() {
     return {
-      roundState: this.$store.state.roundState,
-      player: this.$store.state.player
+      roundState: this.$store.state.roundState
     }
   },
   computed: {
