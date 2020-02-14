@@ -173,7 +173,7 @@ export default {
           if (roundStatus === ROUND_WAITING_FOR_CZAR) {
             clearInterval(pulling);
             console.log('4--------')
-            roundService.requestRoundCandidates().then((cards) => {
+            roundService.requestRoundCandidates(params.gamePin, params.token).then((cards) => {
               console.log('5--------')
               commit('UPDATE_ROUND_CANDIDATE_CARDS', cards);
               commit('UPDATE_STATE', 'CzarSelectionView');
