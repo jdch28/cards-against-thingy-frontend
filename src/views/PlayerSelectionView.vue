@@ -39,7 +39,7 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
-      let params = { pin: pin = this.game.pin,
+      let params = { pin: this.game.pin,
                      token: this.session.token,
                      cardId: this.player.selectedCard.id }
 

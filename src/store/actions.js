@@ -1,6 +1,6 @@
 import GameService from '../services/game_service.js';
 import RoundService from '../services/round_service.js';
-import { ROUND_WAITING_FOR_CZAR, ROUND_WAITING_FOR_PLEBS, ROUND_COMPLETE, GAME_WAITING_FOR_PLEBS, GAME_COMPLETE } from '../constants.js';
+import { ROUND_WAITING_FOR_CZAR, ROUND_WAITING_FOR_PLEBS, GAME_WAITING_FOR_PLEBS, GAME_COMPLETE } from '../constants.js';
 
 export default {
   updateState({ commit }, state) {
