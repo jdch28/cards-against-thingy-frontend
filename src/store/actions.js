@@ -96,11 +96,11 @@ export default {
 
   setupRound({commit}, gameData) {
     let roundService = new RoundService();
-    roundService.getCurrent(gameData.gamePin, gameData.token).then((response) => {
-      if(response.czar_token === gameData.token) {
-        console.log('czar_view');
+    roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round}) => {
+      if(czar_token === gameData.token) {
+        commit('UPDATE_STATE', 'CzarView');
       } else {
-        console.log('normal view')
+        commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
         commit('UPDATE_STATE', 'PlayerSelectionView');
       }
     });
@@ -119,7 +119,8 @@ export default {
   plebStandby({ commit }, params) {
     let roundService = new RoundService(),
       roundStatus = '',
-      gameStatus = '';
+      gameStatus = '',
+      pulling;
 
     while (roundStatus === ROUND_WAITING_FOR_PLEBS) {
       // cada 0.5 segundos
@@ -133,13 +134,16 @@ export default {
     commit('UPATE_ROUND_STATUS', ROUND_WAITING_FOR_CZAR)
     commit('UPDATE_STATE', 'PlayerWaitingView');
 
-    while (roundStatus === ROUND_WAITING_FOR_CZAR) {
-      // cada 0.5 segundos
-      roundService.status(params.pin, params.token).then((round_status, game_status) => {
-        roundStatus = round_status;
-        gameStatus = game_status;
-      });
-    }
+    pulling = setInterval(() => {
+      if(roundStatus === ROUND_WAITING_FOR_CZAR) {
+        roundService.status(params.pin, params.token).then((round_status, game_status) => {
+          roundStatus = round_status;
+          gameStatus = game_status;
+        });
+     }else{
+        clearInterval(pulling);
+     }
+    }, 500)
 
     // make into case
     if (gameStatus === GAME_COMPLETE) {
