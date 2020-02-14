@@ -3,14 +3,15 @@ export default {
   currentState: 'LobbyView',
   lobbySubviews: Array(),
   session: {
-    token: '123',
+    token: 'uAHpRLmYDpK5vyW234myenH3',
     username: '',
   },
   game: {
     pin: 0,
     czarToken: '',
     status: 'waiting',
-    sessions: []
+    sessions: [],
+    scores: []
   },
   player: {
     score: 2,

@@ -5,7 +5,7 @@
     <h1>{{ message }} <button>&raquo;</button></h1>
 
     <div class="round-result__card-container">
-      <card :text="roundState.blackCard.text" :isBlack="true" />
+      <card :text="roundState.blackCard" :isBlack="true" />
       <card :text="roundWinner.whiteCard" />
     </div>
   </main>

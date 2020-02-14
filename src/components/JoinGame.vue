@@ -22,7 +22,7 @@ export default {
       'joinGame'
     ]),
     enterPin(pin) {
-      this.joinGame({ pin: pin, session: this.session.token })
+      this.joinGame({ pin: pin.toUpperCase(), session: this.session.token })
     }
   }
 }

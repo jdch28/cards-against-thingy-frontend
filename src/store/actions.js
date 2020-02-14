@@ -58,18 +58,18 @@ export default {
       });
   },
 
-  gameStatus({ commit }, gamePin) {
+  gameStatus({ commit }, { gamePin, onFinally}) {
     let gameService = new GameService();
     gameService.gameStatus(gamePin).then(
-      ({ pin, status, sessions }) => {
-        commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions });
+      ({ pin, status, sessions, scores }) => {
+        commit('UPDATE_GAME', { pin: pin, status: status, sessions: sessions, scores: scores });
       },
       () => {
         console.error('API: Failed to get game status');
       },
     )
       .finally(() => {
-
+        onFinally();
       });
   },
 
