@@ -4,7 +4,7 @@
     <h1>You're the Card Czar!</h1>
     <p>Now you get to wait for the players to answer to this card. Yay!</p>
     <div class="card-container">
-      <card :text="roundState.blackCard.text" :isBlack="true" />
+      <card :text="roundState.blackCard" :isBlack="true" />
       <div class="spinner"></div>
     </div>
   </main>

@@ -20,6 +20,11 @@ export default {
     state.roundState.candidateCards = candidateCards;
   },
 
+  UPDATE_ROUND(state, { blackCard, round }) {
+    state.roundState.blackCard = blackCard;
+    state.roundState.index = round;
+  },
+
   UPDATE_PLAYER(state, {score, hand}) {
     state.player.score = score;
     state.player.hand = hand;

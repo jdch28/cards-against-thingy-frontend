@@ -2,7 +2,7 @@
   <main class="player-selection-main">
     <header-round :round="roundState.index" :score="player.score"/>
 
-    <card :text="roundState.blackCard.text" :isBlack="true" />
+    <card :text="roundState.blackCard" :isBlack="true" />
 
     <p class="help">Tap twice to confirm your selection</p>
 

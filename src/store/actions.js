@@ -94,24 +94,18 @@ export default {
       commit('UPDATE_GAME', game);
   },
 
-  setupRound({commit}, gameData) {
+  setupRound({commit, dispatch}, gameData) {
     let roundService = new RoundService();
-    roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round}) => {
+    roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round, black_card, round_number}) => {
+        commit('UPDATE_ROUND', { blackCard: black_card, round: round_number});
+        commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
       if(czar_token === gameData.token) {
         commit('UPDATE_STATE', 'CzarView');
       } else {
-        commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
         commit('UPDATE_STATE', 'PlayerSelectionView');
+        dispatch('czarStandby', gameData);
       }
     });
-    // let roundService = new RoundService(),
-    // current = roundService.getCurrent();
-    // if (current.czar_session === current_session) {
-      // setup czar view
-    // } else {
-      // setup player selection view
-      // this.czarStandby()
-    // }
 
     // show round result (or straight to play if first round)
   },
@@ -151,20 +145,25 @@ export default {
     } else if (gameStatus === GAME_WAITING_FOR_PLEBS) {
       this.setupRound();
     } else {
-      // nope lol
+      console.error('Something went very wrong');
     }
   },
 
   czarStandby({ commit }, params) {
     let roundService = new RoundService(),
-      roundStatus = '';
+      roundStatus = '',
+      pulling;
 
-    while (roundStatus === ROUND_WAITING_FOR_PLEBS) {
-      // cada 0.5 segundos
-      roundService.status(params.pin, params.token).then((round_status) => {
-        roundStatus = round_status;
-      });
-    }
+
+      pulling = setInterval(() => {
+        if(roundStatus === ROUND_WAITING_FOR_PLEBS) {
+          roundService.status(params.gamePin, params.token).then((round_status) => {
+            roundStatus = round_status;
+          });
+       }else{
+          clearInterval(pulling);
+       }
+      }, 500)
 
     if (roundStatus === ROUND_WAITING_FOR_CZAR) {
         roundService.requestRoundCandidates().then((cards) => {
@@ -172,7 +171,7 @@ export default {
           commit('UPDATE_STATE', 'CzarSelectionView');
         });
     } else {
-      // nope lol
+      console.error('Something went very wrong');
     }
   },
 
@@ -181,7 +180,6 @@ export default {
       roundService.submitCandidate(params.pin, params.token, params.cardId).then(() => {
           commit('UPDATE_STATE', 'PlayerWaitingView');
           dispatch('plebStandby', params);
-          //this.plebStandby();
         },
         () => { console.error('API: Failed to send a card'); },
       )

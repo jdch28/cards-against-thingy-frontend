@@ -33,10 +33,7 @@ export default {
   roundState: {
     index: 4,
     status:'',
-    blackCard: {
-      id: 1,
-      text: 'My co-worker filed a complaint after they found %blank% at my desk.'
-    },
+    blackCard: 'My co-worker filed a complaint after they found %blank% at my desk.',
     candidateCards: [
       { text: 'Another player played this', token: ''},
       { text: 'Legacy code', token: ''},
