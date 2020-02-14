@@ -36,7 +36,7 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
-      this.updateState('WaitingSentView');
+      this.updateState('PlayerWaitingView');
     }
   }
 }
