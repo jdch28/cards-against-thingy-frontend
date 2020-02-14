@@ -4,7 +4,7 @@
       <card
         :text="card.text"
         @click.native="isClickable ? tapCard(card.id) : null"
-        :class="{ 'card-selected': card.id === player.selectedCard.id }"
+        :class="{ 'card-selected': markAsSelected(card.id) }"
       />
     </li>
   </ul>
@@ -39,6 +39,10 @@ export default {
       } else {
         this.updateSelectedCardId(cardId);
       }
+    },
+    markAsSelected(cardId) {
+      let selectedId = this.player.selectedCard.id;
+      return this.isClickable && (cardId === selectedId);
     }
   }
 }
