@@ -9,6 +9,7 @@ import LobbyView from './views/LobbyView.vue'
 import PlayerSelectionView from './views/PlayerSelectionView.vue'
 import PlayerWaitingView from './views/PlayerWaitingView.vue'
 import CzarView from './views/CzarView.vue'
+import GameResultView from './views/GameResultView.vue'
 
 export default {
   name: 'App',
@@ -16,7 +17,8 @@ export default {
     LobbyView,
     PlayerSelectionView,
     PlayerWaitingView,
-    CzarView
+    CzarView,
+    GameResultView
   },
   computed: {
     currentState: {

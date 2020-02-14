@@ -2,7 +2,7 @@
   <main>
     <header-round :round="roundState.index" :score="player.score"/>
 
-    <section class="waiting-for-plebs__section">
+    <section v-if="roundState.status === waitingForPlebs" class="waiting-for-plebs__section">
       <h2>Your play:</h2>
 
       <card :text="roundState.blackCard.text" :isBlack="true" />
@@ -11,7 +11,7 @@
       <h2>Waiting for other players...</h2>
     </section>
 
-    <section class="waiting-for-czar__section">
+    <section v-else class="waiting-for-czar__section">
       <h2>Waiting for czar selection... </h2>
       <card :text="roundState.blackCard.text" :isBlack="true" />
 
@@ -26,6 +26,7 @@
 import Card from '../components/Card.vue'
 import CardList from '../components/CardList.vue'
 import HeaderRound from '../components/HeaderRound.vue'
+import { ROUND_WAITING_FOR_PLEBS } from '../constants.js';
 
 export default {
   name: 'PlayerWaitingView',
@@ -37,7 +38,8 @@ export default {
   data() {
     return {
       player: this.$store.state.player,
-      roundState: this.$store.state.roundState
+      roundState: this.$store.state.roundState,
+      waitingForPlebs: ROUND_WAITING_FOR_PLEBS,
     }
   }
 }

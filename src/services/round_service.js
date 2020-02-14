@@ -21,7 +21,7 @@ export default class RoundService {
     });
   }
 
-  getCards(gamePin, sessionToken) {
+  requestRoundCandidates(gamePin, sessionToken) {
     const getUrl = `${BASE_URL}/rounds/card_list.json?pin=${gamePin}&token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {
@@ -64,6 +64,24 @@ export default class RoundService {
       axios({
         method: 'POST',
         url: postUrl,
+      }).then(
+        ({ data }) => {
+          resolve(data);
+        },
+        (response) => {
+          reject(response);
+        },
+      );
+    });
+  }
+
+  status(gamePin, sessionToken) {
+    const getUrl = `${BASE_URL}/rounds/status.json?pin=${gamePin}&token=${sessionToken}`;
+
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'GET',
+        url: getUrl,
       }).then(
         ({ data }) => {
           resolve(data);

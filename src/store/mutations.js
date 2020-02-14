@@ -12,6 +12,14 @@ export default {
     state.roundResults = current;
   },
 
+  UPDATE_ROUND_STATUS(state, status) {
+    state.roundState.status = status;
+  },
+
+  UPDATE_ROUND_CANDIDATE_CARDS(state, candidateCards) {
+    state.roundState.playedCards = candidateCards;
+  },
+
   UPDATE_NAME(state, current) {
     state.currentState = current;
   },

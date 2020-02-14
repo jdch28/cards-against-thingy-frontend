@@ -19,7 +19,7 @@ import ChooseWisely from '../components/ChooseWisely.vue'
 import GameLobby from '../components/GameLobby.vue'
 import JoinGame from '../components/JoinGame.vue'
 
-setTimeout(function(){ document.getElementById('wise-input-id').focus(); }, 5000);
+//setTimeout(function(){ document.getElementById('wise-input-id').focus(); }, 5000);
 
 export default {
   name: 'LobbyView',

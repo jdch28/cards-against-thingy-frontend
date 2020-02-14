@@ -1,5 +1,6 @@
 import GameService from '../services/game_service.js';
-
+import RoundService from '../services/round_service.js';
+import { ROUND_WAITING_FOR_CZAR, ROUND_WAITING_FOR_PLEBS, ROUND_COMPLETE, GAME_WAITING_FOR_PLEBS, GAME_COMPLETE } from '../constants.js';
 
 export default {
   updateState({ commit }, state) {
@@ -106,61 +107,79 @@ export default {
   //   // show round result (or straight to play if first round)
   // }
 
-  // plebStandby() {
-  //   let roundService = new RoundService(),
-  //     status = {};
+  plebStandby({ commit }, params) {
+    let roundService = new RoundService(),
+      roundStatus = '',
+      gameStatus = '';
 
-  //   while (status.label === 'waiting for plebs') {
-  //     // cada 0.5 segundos
-  //     status = roundService.status();
-  //   }
+    while (roundStatus === ROUND_WAITING_FOR_PLEBS) {
+      // cada 0.5 segundos
+      roundService.status(params.pin, params.token).then((round_status, game_status) => {
+        roundStatus = round_status;
+        gameStatus = game_status;
+      });
+    }
 
-  //   // update view to waiting for czar
+    // update view to waiting for czar
+    commit('UPATE_ROUND_STATUS', ROUND_WAITING_FOR_CZAR)
+    commit('UPDATE_STATE', 'PlayerWaitingView');
 
-  //   while (status.label === 'waiting for czar') {
-  //     // cada 0.5 segundos
-  //     status = roundService.status();
-  //   }
+    while (roundStatus === ROUND_WAITING_FOR_CZAR) {
+      // cada 0.5 segundos
+      roundService.status(params.pin, params.token).then((round_status, game_status) => {
+        roundStatus = round_status;
+        gameStatus = game_status;
+      });
+    }
 
-  //   // make into case
-  //   if (status.label === 'complete') {
-  //     // show scoreboard view
-  //   } else if (status.label === 'waiting for plebs') {
-  //     this.setupRound();
-  //   } else {
-  //     // nope lol
-  //   }
-  // }
+    // make into case
+    if (gameStatus === GAME_COMPLETE) {
+      commit('UPDATE_STATE', 'PlayerWaitingView');
+    } else if (gameStatus === GAME_WAITING_FOR_PLEBS) {
+      this.setupRound();
+    } else {
+      // nope lol
+    }
+  },
 
-  // czarStandby() {
-  //   let roundService = new RoundService(),
-  //     status = {label: 'waiting for plebs'};
+  czarStandby({ commit }, params) {
+    let roundService = new RoundService(),
+      roundStatus = '';
 
-  //   while (status.label === 'waiting for plebs') {
-  //     // cada 0.5 segundos
-  //     status = roundService.status();
-  //   }
+    while (roundStatus === ROUND_WAITING_FOR_PLEBS) {
+      // cada 0.5 segundos
+      roundService.status(params.pin, params.token).then((round_status) => {
+        roundStatus = round_status;
+      });
+    }
 
-  //   if (status.label === 'waiting for czar') {
-  //     roundService.requestRoundCandidates();
-  //     // show czar selection view
-  //   } else {
-  //     // nope lol
-  //   }
-  // }
+    if (roundStatus === ROUND_WAITING_FOR_CZAR) {
+        roundService.requestRoundCandidates().then((cards) => {
+          commit('UPDATE_ROUND_CANDIDATE_CARDS', cards);
+          commit('UPDATE_STATE', 'CzarSelectionView');
+        });
+    } else {
+      // nope lol
+    }
+  },
 
-  // plebSubmit(cardId) {
-  //   let roundService = new RoundService();
-
-  //   roundService.submitCandidate(cardId);
-
-  //   this.plebStandby();
-  // }
+  plebSubmit({ commit, dispatch }, params) {
+    let roundService = new RoundService();
+      roundService.submitCandidate(params.pin, params.token, params.cardId).then(() => {
+          commit('UPDATE_STATE', 'PlayerWaitingView');
+          dispatch('plebStandby', params);
+          //this.plebStandby();
+        },
+        () => { console.error('API: Failed to send a card'); },
+      )
+        .finally(() => {
+      });
+  }
 
   // czarSubmit(cardId) {
   //   let roundService = new RoundService();
 
-  //   roundService.submitWinner(cardId);
+  //   roundService.submitWinner(cardId); //card session token
 
   //   this.setupRound();
   // }

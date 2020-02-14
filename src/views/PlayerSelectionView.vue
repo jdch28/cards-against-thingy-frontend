@@ -40,7 +40,11 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
-      // TODO: actions.plebSubmit(cardId)
+      let params = { pin: pin = this.game.pin,
+                     token: this.session.token,
+                     cardId: this.player.selectedCard.id }
+
+      this.plebSubmit(params);
       let roundService = RoundService();
       roundService.submitCard(this.game.pin,
                              this.session.token,
