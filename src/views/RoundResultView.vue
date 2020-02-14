@@ -34,7 +34,8 @@ export default {
       'roundWinner',
       'game',
       'player',
-      'session'
+      'session',
+      'roundState',
     ]),
     message() {
       if ( this.oldState.czar === this.session.token ) {
@@ -51,7 +52,8 @@ export default {
       'showPlayViews'
     ]),
     swapView() {
-      this.showPlayViews({czar: this.game.czar, gameData: {gamePin: this.game.pin, token: this.session.token}});
+      let oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
+      this.showPlayViews({czar: this.game.czar, gameData: {gamePin: this.game.pin, token: this.session.token, oldState: oldState}});
     }
   }
 }

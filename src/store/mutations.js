@@ -18,7 +18,6 @@ export default {
 
   UPDATE_OLD_STATE(state, oldState) {
     console.log("UPDATE_OLD_STATE", state);
-    //var oldState = {blackCard: state.roundState.blackCard, czar: state.game.czar, round: state.roundState.index};
     state.oldState = oldState;
     console.log("UPDATE_OLD_STATE", state);
   },

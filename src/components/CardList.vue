@@ -19,6 +19,7 @@
 import { mapActions, mapState } from 'vuex'
 import Card from '../components/Card.vue'
 import RoundService from '../services/round_service.js';
+import { GAME_COMPLETE } from '../constants.js';
 
 export default {
   name: 'CardList',
@@ -45,7 +46,8 @@ export default {
       'updatePlayerHand',
       'plebSubmit',
       'updateSelectedCardId',
-      'setupRound'
+      'setupRound',
+      'gameStatus',
     ]),
 
     tapCard(cardId) {
@@ -59,17 +61,6 @@ export default {
                       oldState: oldState}
 
         this.plebSubmit(params);
-        // let roundService = new RoundService();
-        // roundService.submitCandidate(this.game.pin,
-        //                       this.session.token,
-        //                       this.player.selectedCard.id).then(() => {
-        //     this.updateState('PlayerWaitingView');
-        //     console.log('session created');
-        //   },
-        //   () => { console.error('API: Failed to create session'); },
-        // )
-        //   .finally(() => {
-        // });
       } else {
         this.updateSelectedCardId(cardId);
       }
@@ -80,15 +71,26 @@ export default {
     },
     submitWinner(cardId) {
       let roundService = new RoundService();
-       roundService.submitWinner(this.game.pin, this.session.token, cardId).then(() => {
-            var oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
+      let that = this;
+
+      roundService.submitWinner(this.game.pin, this.session.token, cardId).then(
+        ({ game_status }) => {
+          if (game_status === GAME_COMPLETE) {
+            this.gameStatus({
+              gamePin: this.game.pin,
+              onFinally: function(){
+                that.updateState('GameResultView');
+              }
+            });
+          } else {
+            let oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
             this.setupRound({gamePin: this.game.pin, token:this.session.token, skipResultView: false, oldState: oldState});
-           },
-           () => {
-             console.error('API: Failed to send a card');
-           },
-         )
-         .finally(() => {});
+          }
+        },
+        () => {
+          console.error('API: Failed to send a card');
+        },
+      ).finally(() => {});
     }
   }
 }

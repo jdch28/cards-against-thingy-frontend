@@ -30,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['session', 'game', 'player'])
+    ...mapState(['session', 'game', 'player', 'roundState'])
   },
   methods: {
     ...mapActions([
@@ -40,9 +40,11 @@ export default {
     ]),
     submitSelected() {
       this.updatePlayerHand();
+      let oldState = {blackCard: this.roundState.blackCard, czar: this.game.czar, round: this.roundState.index};
       let params = { pin: this.game.pin,
                      token: this.session.token,
-                     cardId: this.player.selectedCard.id }
+                     cardId: this.player.selectedCard.id,
+                     oldState: oldState }
 
       this.plebSubmit(params);
       let roundService = RoundService();
