@@ -1,6 +1,6 @@
 
 export default {
-  currentState: 'LobbyView',
+  currentState: 'GameResultView',
   lobbySubviews: Array(),
   session: {
     token: '123',
