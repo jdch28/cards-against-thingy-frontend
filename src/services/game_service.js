@@ -39,8 +39,8 @@ export default class GameService {
     });
   }
 
-  gameStatus(gamePin) {
-    const postUrl = `${BASE_URL}/games/${gamePin}/status.json`;
+  gameStatus(gamePin, sessionToken) {
+    const postUrl = `${BASE_URL}/games/${gamePin}/status.json?token=${sessionToken}`;
 
     return new Promise((resolve, reject) => {
       axios({

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants.js';
 
-
 export default class RoundService {
   roundStatus(gamePin, sessionToken) {
     const getUrl = `${BASE_URL}/rounds/status.json?pin=${gamePin}&token=${sessionToken}`;
@@ -17,6 +16,26 @@ export default class RoundService {
         response => {
           reject(response);
         }
+      );
+    });
+  }
+
+  getCurrent(gamePin, sessionToken) {
+    const getUrl = `${BASE_URL}/rounds/current.json?token=${sessionToken}&pin=${gamePin}&`;
+
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'GET',
+        url: getUrl,
+      }).then(
+        ({
+          data
+        }) => {
+          resolve(data);
+        },
+        (response) => {
+          reject(response);
+        },
       );
     });
   }

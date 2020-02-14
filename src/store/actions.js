@@ -90,22 +90,31 @@ export default {
       });
   },
 
+  updateGame({ commit }, game) {
+      commit('UPDATE_GAME', game);
+  },
 
-  // TODO: todos estos metodos
+  setupRound({commit}, gameData) {
+    let roundService = new RoundService();
+    roundService.getCurrent(gameData.gamePin, gameData.token).then((response) => {
+      if(response.czar_token === gameData.token) {
+        console.log('czar_view');
+      } else {
+        console.log('normal view')
+        commit('UPDATE_STATE', 'PlayerSelectionView');
+      }
+    });
+    // let roundService = new RoundService(),
+    // current = roundService.getCurrent();
+    // if (current.czar_session === current_session) {
+      // setup czar view
+    // } else {
+      // setup player selection view
+      // this.czarStandby()
+    // }
 
-  // setupRound() {
-  //   let roundService = new RoundService(),
-  //     current = roundService.getCurrent();
-
-  //   if (current.czar_session === current_session) {
-  //     // setup czar view
-  //   } else {
-  //     // setup player selection view
-  //     this.czarStandby()
-  //   }
-
-  //   // show round result (or straight to play if first round)
-  // }
+    // show round result (or straight to play if first round)
+  },
 
   plebStandby({ commit }, params) {
     let roundService = new RoundService(),

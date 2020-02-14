@@ -25,7 +25,6 @@ export default {
       this.joinGame({ pin: pin, session: this.session.token })
     }
   }
-
 }
 </script>
 
