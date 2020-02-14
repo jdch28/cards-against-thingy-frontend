@@ -35,7 +35,7 @@ export default {
   roundState: {
     index: 4,
     status:'',
-    blackCard: 'My co-worker filed a complaint after they found %blank% at my desk.',
+    blackCard: 'My co-worker filed a complaint after they found __________ at my desk.',
     candidateCards: [
       { text: 'Another player played this', id: 1},
       { text: 'Legacy code', id: 2 },
@@ -47,6 +47,6 @@ export default {
   roundWinner: {
     name: 'Bruni',
     token: '123',
-    whiteCard: 'A missing semicolon'
+    card: 'A missing semicolon'
   }
 };

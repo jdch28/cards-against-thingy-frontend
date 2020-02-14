@@ -25,6 +25,10 @@ export default {
     state.roundState.index = round;
   },
 
+  UPDATE_WINNER(state, winner) {
+    state.roundWinner = winner;
+  },
+
   UPDATE_PLAYER(state, {score, hand}) {
     state.player.score = score;
     state.player.hand = hand;

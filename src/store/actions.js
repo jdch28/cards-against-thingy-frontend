@@ -97,7 +97,8 @@ export default {
   setupRound({commit, dispatch}, gameData) {
     let roundService = new RoundService();
     roundService.getCurrent(gameData.gamePin, gameData.token).then(({czar_token, player_hand, last_round, black_card, round_number}) => {
-        commit('UPDATE_ROUND', { blackCard: black_card, round: round_number});
+        commit('UPDATE_ROUND', { blackCard: black_card, round: round_number });
+        commit('UPDATE_WINNER', last_round.winner);
         commit('UPDATE_PLAYER', { hand: player_hand, score: last_round.score });
         commit('UPDATE_CURRENT_CZAR', czar_token);
         if(gameData.skipResultView) {
