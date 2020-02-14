@@ -54,7 +54,6 @@ export default {
   }
 
   .card-selected {
-    margin-left: 0;
     padding-left: 2em;
     padding-right: 2em;
   }

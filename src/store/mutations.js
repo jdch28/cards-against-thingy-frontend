@@ -9,7 +9,7 @@ export default {
   },
 
   UPDATE_ROUND_RESULTS(state, current) {
-    state.roundResults = current;
+    state.roundWinner = current.winner;
   },
 
   UPDATE_ROUND_STATUS(state, status) {
@@ -17,7 +17,7 @@ export default {
   },
 
   UPDATE_ROUND_CANDIDATE_CARDS(state, candidateCards) {
-    state.roundState.playedCards = candidateCards;
+    state.roundState.candidateCards = candidateCards;
   },
 
   UPDATE_NAME(state, current) {

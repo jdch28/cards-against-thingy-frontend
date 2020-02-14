@@ -17,7 +17,6 @@
 
       <h2>Options by other players:</h2>
       <card-list :cards="roundState.playedCards"/>
-      <!-- cardlist con los resultados -->
     </section>
   </main>
 </template>
@@ -46,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-  .waiting-for-plebs__section {
+  .waiting-for-czar__section {
     display: none;
   }
   h2 {

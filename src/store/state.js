@@ -3,7 +3,7 @@ export default {
   currentState: 'LobbyView',
   lobbySubviews: Array(),
   session: {
-    token: '',
+    token: '123',
     username: '',
   },
   game: {
@@ -37,23 +37,17 @@ export default {
       id: 1,
       text: 'My co-worker filed a complaint after they found %blank% at my desk.'
     },
-    playedCards: [
-      { text: 'Another player played this', token:'' },
-      { text: 'Legacy code', token:'' },
-      { text: 'These are some random cards', token:'' },
-      { text: 'A missing semicolon', token:'' },
-      { text: 'I\'m hungry', token:'' },
-      { text: 'Just a small change in production', token:'' },
-      { text: 'Legacy code', token:'' },
-      { text: 'A missing semicolon', token:'' },
-      { text: 'Just a small change in production', token:'' },
-      { text: 'Legacy code', token:'' }
+    candidateCards: [
+      { text: 'Another player played this', token: ''},
+      { text: 'Legacy code', token: ''},
+      { text: 'These are some random cards', token: ''},
+      { text: 'A missing semicolon', token: ''},
+      { text: 'I\'m hungry,', token: '' }
     ]
   },
-  roundResults: {
-    winnerPlayer: '',
-    whiteCard: 'OMG!!',
-    blackCard: 'KHE!?',
-    isWinner: true,
+  roundWinner: {
+    name: 'Bruni',
+    token: '123',
+    whiteCard: 'A missing semicolon'
   }
 };
