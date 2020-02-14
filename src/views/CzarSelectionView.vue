@@ -3,11 +3,11 @@
     <header-round :round="roundState.index" :score="player.score"/>
 
     <h1>Choose a winner, Czar.</h1>
-    <card :text="roundState.blackCard.text" :isBlack="true" />
+    <card :text="roundState.blackCard" :isBlack="true" />
 
     <p class="help">Tap twice to confirm your selection</p>
 
-    <card-list :cards="roundState.candidates" :isClickable="true" v-on:submit-selected-card="submitWinner"/>
+    <card-list :cards="roundState.candidateCards" :isClickable="true" :isCzar="true"/>
   </main>
 </template>
 
@@ -26,18 +26,17 @@ export default {
   },
   data() {
     return {
+      game: this.$store.state.game,
+      session: this.$store.state.session,
       roundState: this.$store.state.roundState,
       player: this.$store.state.player
     }
   },
   methods: {
     ...mapActions([
-      'updateState'
+      'updateState',
+      'setupRound'
     ]),
-    submitWinner() {
-      console.log('yay');
-      // TODO: actions.czarSubmit
-    }
   }
 }
 </script>

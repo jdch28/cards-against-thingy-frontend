@@ -36,11 +36,11 @@ export default {
     status:'',
     blackCard: 'My co-worker filed a complaint after they found %blank% at my desk.',
     candidateCards: [
-      { text: 'Another player played this', token: ''},
-      { text: 'Legacy code', token: ''},
-      { text: 'These are some random cards', token: ''},
-      { text: 'A missing semicolon', token: ''},
-      { text: 'I\'m hungry,', token: '' }
+      { text: 'Another player played this', id: 1},
+      { text: 'Legacy code', id: 2 },
+      { text: 'These are some random cards', id: 3},
+      { text: 'A missing semicolon', id: 4},
+      { text: 'I\'m hungry,', id: 5 }
     ]
   },
   roundWinner: {

@@ -1,7 +1,12 @@
 <template>
   <ul>
     <li v-for="card in cards" :key="card.id">
-      <card
+      <card v-if="isCzar"
+        :text="card.text"
+        @click.native="isClickable ? submitWinner(card.id) : null"
+        :class="{ 'card-selected': markAsSelected(card.id) }"
+      />
+      <card v-else
         :text="card.text"
         @click.native="isClickable ? tapCard(card.id) : null"
         :class="{ 'card-selected': markAsSelected(card.id) }"
@@ -13,6 +18,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import Card from '../components/Card.vue'
+import RoundService from '../services/round_service.js';
 
 export default {
   name: 'CardList',
@@ -21,6 +27,10 @@ export default {
   },
   props: {
     cards: Array,
+    isCzar:  {
+      type: Boolean,
+      default: false,
+    },
     isClickable:  {
       type: Boolean,
       default: false,
@@ -34,7 +44,8 @@ export default {
       'updateState',
       'updatePlayerHand',
       'plebSubmit',
-      'updateSelectedCardId'
+      'updateSelectedCardId',
+      'setupRound'
     ]),
 
     tapCard(cardId) {
@@ -64,6 +75,17 @@ export default {
     markAsSelected(cardId) {
       let selectedId = this.player.selectedCard.id;
       return this.isClickable && (cardId === selectedId);
+    },
+    submitWinner(cardId) {
+      let roundService = new RoundService();
+       roundService.submitWinner(this.game.pin, this.session.token, cardId).then(() => {
+            this.setupRound({gamePin: this.game.pin, token:this.session.token});
+           },
+           () => {
+             console.error('API: Failed to send a card');
+           },
+         )
+         .finally(() => {});
     }
   }
 }

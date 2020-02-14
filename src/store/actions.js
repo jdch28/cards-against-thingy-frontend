@@ -192,16 +192,7 @@ export default {
       )
         .finally(() => {
       });
-  }
-
-  // czarSubmit(cardId) {
-  //   let roundService = new RoundService();
-
-  //   roundService.submitWinner(cardId); //card session token
-
-  //   this.setupRound();
-  // }
-
+  },
 
 
 };
